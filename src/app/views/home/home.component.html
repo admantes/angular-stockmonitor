@@ -1,26 +1,30 @@
-<div class="container-fluid bg-secondary text-white"> The following are real time values from the Philippine Stock Market</div> 
-
+<div class="container-fluid"> 
+  <div class="row">
+<div class="col-lg-2 bg-secondary mt-2  text-white"> Sidebar</div>
+<div class="col-lg-9">
+<div class="bg-secondary text-white mt-2 p-2 bg-success"> The following are real time values from the Philippine Stock Market</div> 
+ 
 <table class="table table-striped">
-  <thead>
+  <thead>    
   <tr>
-    <th scope="col">#</th>
+    <th scope="col"> # </th>
     <th scope="col"> Symbol </th>
     <th scope="col">Shares</th>
     <th scope="col"> Current Price </th>
-    <th scope="col">Ave. Price</th>
+    <th scope="col"> Ave. Price</th>
     <th scope="col"> % Change</th>
     <th scope="col"> Market Value </th>
     <th scope="col"> Total Cost </th>
     <th scope="col"> Gain/Loss </th>
-    <th scope="col"> Stop Loss</th>
+    <th scope="col"> Stop Loss</th> 
     <th scope="col"> Target</th>
     <th scope="col"> Advice </th>
     <th scope="col"> Actions</th>
-  </tr>
+  </tr> 
   </thead>
   <tbody>
  
-  <tr *ngFor="let stock of stocks.stock; index as i"> 
+  <tr *ngFor="let stock of stocks; index as i"> 
     <th scope="row">{{ i + 1 }}</th>
     <td>{{ stock.symbol | uppercase }}</td>
     <td>{{ stock.shares | number }}</td>   
@@ -33,7 +37,11 @@
     <td>{{ stock.stoploss | number:"1.2-2"  }}</td> 
     <td>{{ stock.target | number:"1.2-2"   }}</td> 
     <td class="{{ stock.action | actionColor }}">{{ stock.action }}</td> 
-    <td> Update / Delete </td>
+    <td> <fa name="pencil" tooltip="Edit" (click)="editStock(stock.symbol)"></fa> &nbsp; <fa name="trash" tooltip="Delete" (click)="deleteStock(stock.symbol)"></fa>  </td>
   </tr>
   </tbody>
 </table>
+
+</div>
+</div>
+</div>

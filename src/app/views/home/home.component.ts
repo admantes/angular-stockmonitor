@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StockService } from '../../stock.service';
 import { Stocks } from '../../models/stock';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -21,18 +22,32 @@ export class HomeComponent implements OnInit {
     this.readStockData();
 
     //Get Stock Prices at regular intervals
-    setInterval( ()=>{
-     this.readStockData();
-    }, this.INTERVAL);
-     
+    interval( this.INTERVAL ).subscribe( n=>{     
+        this.readStockData();
+      }
+    )
+
+   
+
   }
 
 
   readStockData(){
     this.stockService.getStocks().subscribe(
       stocks => {         
-        this.stocks = stocks;
+        this.stocks = stocks.stock;
       }
     );
+  }
+
+  deleteStock(symbol){
+    
+   
+    //Delete on backend
+    this.stockService.deleteStock(symbol); 
+
+     //Delete on UI
+     this.stocks = this.stocks.filter( item => item.symbol != symbol );
+
   }
 }
