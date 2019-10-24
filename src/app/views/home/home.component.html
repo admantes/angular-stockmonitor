@@ -33,10 +33,10 @@
     <td>{{ stock.percent_change }}</td> 
     <td>{{ stock.marketvalue | number:"1.2-2"  }}</td> 
     <td>{{ stock.totalcost | number:"1.2-2"  }}</td> 
-    <td class="{{stock.fcolor}}">{{ stock.gainloss | number:"1.2-2" }}</td> 
+    <td [ngClass]="stock.fcolor">{{ stock.gainloss | number:"1.2-2" }}</td> 
     <td>{{ stock.stoploss | number:"1.2-2"  }}</td> 
     <td>{{ stock.target | number:"1.2-2"   }}</td> 
-    <td class="{{ stock.action | actionColor }}">{{ stock.action }}</td> 
+    <td [ngClass]=" stock.action | actionColor ">{{ stock.action }}</td> 
     <td> <fa name="pencil" tooltip="Edit" (click)="editStock(stock.symbol)"></fa> &nbsp; <fa name="trash" tooltip="Delete" (click)="deleteStock(stock.symbol)"></fa>  </td>
   </tr>
   </tbody>

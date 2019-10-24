@@ -11,7 +11,7 @@ import { interval } from 'rxjs';
 export class HomeComponent implements OnInit {
   INTERVAL = 30 * 1000; //Seconds
   title = "Stockers";
-  stocks: Stocks;
+  stocks: Array<any>;
 
   constructor( private stockService:StockService ) {
      
