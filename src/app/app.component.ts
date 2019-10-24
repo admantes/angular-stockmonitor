@@ -10,17 +10,19 @@ export class AppComponent {
  
   @ViewChild(HomeComponent, { static: false })
    private child: HomeComponent;
-  comp;
+  routeChildComponent;
 
   Refresh(){
-     
-    console.log(this.comp);
-    this.comp.readStockData();
+    //console.log(this.routeChildComponent);
+    this.routeChildComponent.readStockData();
   }
 
+  //Called when router activates a component and passes the component reference 
   onActivate(componentReference) {
     console.log(componentReference)
-    this.comp = componentReference;
+    this.routeChildComponent = componentReference;
    // componentReference.anyFunction();
  }
+
+ 
 }

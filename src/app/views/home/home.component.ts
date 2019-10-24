@@ -50,4 +50,6 @@ export class HomeComponent implements OnInit {
      this.stocks = this.stocks.filter( item => item.symbol != symbol );
 
   }
+
+  onEnter(value: string) { alert(value); }
 }
