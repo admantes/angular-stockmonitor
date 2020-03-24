@@ -1,7 +1,25 @@
 <div class="container-fluid"> 
   <div class="row">
-<div class="col-lg-2 bg-secondary mt-2  text-white"> Sidebar</div>
+
+
+  <!-- Sidebar -->
+  <div class="col-lg-2 bg-secondary mt-2  text-white">  
+
+
+  </div>
+
+
 <div class="col-lg-9">
+
+  <!-- Add Stock -->
+  <div *ngIf="showAddScreen" style="margin-top: 10px;">
+    <form [formGroup]="addForm" (submit)="saveStock($event)">  
+      <input type="text" style="margin-right: 10px;" placeholder="Symbol (JFC)" formControlName="addSymbol">
+      <input type="text" style="margin-right: 10px;" placeholder="Shares (200)"  formControlName="addShares">
+      <input type="text" style="margin-right: 10px;"  placeholder="Average Price (123.0000)"  formControlName="addPrice">
+      <button class="btn btn-outline-success my-2 my-sm-0" (click)="saveStock($event)">Save Stock</button>
+    </form>
+  </div>
 <div class="bg-secondary text-white mt-2 p-2 bg-success"> The following are real time values from the Philippine Stock Market</div> 
  
 <table class="table table-striped">
@@ -27,9 +45,9 @@
   <tr *ngFor="let stock of stocks; index as i"> 
     <th scope="row">{{ i + 1 }}</th>
     <td>{{ stock.symbol | uppercase }}</td>
-    <td><span  *ngIf="isEditing(i)"> <input style="width: 100%;" #shares (keyup)="updateShares(shares.value)"></span><span *ngIf="!isEditing(i)">{{ stock.shares | number  }} </span></td>   
+    <td><span  *ngIf="isEditing(i)"> <input style="width: 100%;background-color: #abf3e3;" #shares (keyup)="updateShares(shares.value)" value="{{sharesPlaceholder}}"></span><span *ngIf="!isEditing(i)">{{ stock.shares | number  }} </span></td>   
     <td>{{ stock.price | number }}</td> 
-    <td><span  *ngIf="isEditing(i)"> <input style="width: 50px;" #editPrice (keyup)="updateAveragePrice(editPrice.value)"></span><span *ngIf="!isEditing(i)">{{ stock.aveprice | number }} </span></td> 
+    <td><span  *ngIf="isEditing(i)"> <input style="width: 100%; background-color: #abf3e3;" #editPrice (keyup)="updateAveragePrice(editPrice.value)"  value="{{pricePlaceholder}}"></span><span *ngIf="!isEditing(i)">{{ stock.aveprice | number }} </span></td> 
     <td>{{ stock.percent_change }}</td> 
     <td>{{ stock.marketvalue | number:"1.2-2"  }}</td> 
     <td>{{ stock.totalcost | number:"1.2-2"  }}</td> 
@@ -41,11 +59,12 @@
 
       <!-- Normal View -->
       <span *ngIf="!isEditing(i)"> 
-         <fa name="pencil" tooltip="Edit" (click)="showEditFields(i)"></fa> &nbsp; <fa name="trash" tooltip="Delete" (click)="deleteStock(stock.symbol)"></fa> 
+         <fa name="pencil" tooltip="Edit" (click)="showEditFields(i, stock.shares, stock.aveprice)" ></fa> &nbsp; 
+         <fa name="trash" tooltip="Delete" (click)="deleteStock(stock.symbol)"  style="color:red;"></fa> 
       </span>
       <!-- Editing View-->
       <span *ngIf="isEditing(i)">
-      <fa name="close" tooltip="Edit" (click)="cancelEditing()"></fa> &nbsp; <fa name="check" tooltip="Update" (click)="updateStock(stock.symbol)"></fa> 
+      <fa name="close" tooltip="Edit" (click)="cancelEditing()" style="color:red"></fa> &nbsp; <fa name="check" tooltip="Update" (click)="updateStock(stock.symbol)" style="color:green"></fa> 
     </span>
     </td>
   </tr>

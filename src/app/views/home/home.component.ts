@@ -14,9 +14,18 @@ export class HomeComponent implements OnInit {
   title = "Stockers";
   stocks: Array<any>;
   editing: boolean = false;
+  showAddScreen : boolean = true;
   editingIndex = -1;
   editingShares = 0;
   editingAveragePrice = 0;
+  sharesPlaceholder = "0";
+  pricePlaceholder = "0";
+ 
+  addForm = new FormGroup({
+    addSymbol: new FormControl(''), 
+    addShares: new FormControl(''),
+    addPrice: new FormControl(''),
+  });
 
   constructor( private stockService:StockService ) {
      
@@ -56,16 +65,25 @@ export class HomeComponent implements OnInit {
 
   }
 
-  showEditFields(index){
+  async saveStock(e){
+    e.preventDefault();
+     console.log("saved");
+     let symbol:string = this.addForm.controls.addSymbol.value.toUpperCase();
+     let shares = this.addForm.controls.addShares.value;
+     let price = this.addForm.controls.addPrice.value;
+     let res = await this.stockService.saveStock(symbol, shares, price);
+     this.addForm.controls.addSymbol.setValue("");
+     this.addForm.controls.addShares.setValue("");
+     this.addForm.controls.addPrice.setValue("");
+  }
+
+  showEditFields(index, origShares, origPrice){
     
    this.editing = true;
    this.editingIndex = index;
-    //Delete on backend
-   // this.stockService.deleteStock(symbol); 
-
-     //Delete on UI
-   //  this.stocks = this.stocks.filter( item => item.symbol != symbol );
-
+   this.sharesPlaceholder = origShares;
+   this.pricePlaceholder = origPrice;
+   
   }
 
   cancelEditing(){
@@ -85,10 +103,11 @@ export class HomeComponent implements OnInit {
     this.editingAveragePrice = (val);
   }
   
-  updateStock(symbol){
+  async updateStock(symbol){
     console.log(symbol);
     
-    this.stockService.editStock(symbol, this.editingShares, this.editingAveragePrice);
+   let result = await this.stockService.editStock(symbol, this.editingShares, this.editingAveragePrice);
+   this.cancelEditing();
   }
 
   onEnter(value: string) { alert(value); }

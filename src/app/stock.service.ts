@@ -17,8 +17,7 @@ export class StockService {
     return this.http.get<Stocks>(this.baseUrl + 'fetchdata.php')
   }
 
-  deleteStock(symbol){
-    let inData = {symbol: symbol};
+  deleteStock(symbol){  
     let formData: FormData = new FormData();
     formData.append('symbol', symbol);
     this.http.post<any>( this.baseUrl + 'deletestock.php', formData ).subscribe( data => this.getStocks() );
@@ -26,10 +25,27 @@ export class StockService {
 
   editStock(symbol, shares, price){
     let inData = {symbol: symbol, shares: shares, aveprice: price};
-    this.http.post( this.baseUrl + 'editstock.php', inData).subscribe( data => {
+    let formData: FormData = new FormData();
+    formData.append('symbol', symbol);
+    formData.append('shares', shares);
+    formData.append('aveprice', price);
+
+    this.http.post( this.baseUrl + 'editstock.php', formData).subscribe( data => {
       this.getStocks() 
-    });
-    console.log(shares);
+    });    
+    
+  }
+
+  saveStock(symbol, shares, price){
+    let inData = {symbol: symbol, shares: shares, aveprice: price};
+    let formData: FormData = new FormData();
+    formData.append('symbol', symbol);
+    formData.append('shares', shares);
+    formData.append('aveprice', price);
+
+    this.http.post( this.baseUrl + 'savestock.php', formData).subscribe( data => {
+      this.getStocks() 
+    });    
     
   }
 }
