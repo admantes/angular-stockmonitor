@@ -18,7 +18,18 @@ export class StockService {
   }
 
   deleteStock(symbol){
-    let inData = {"symbol": symbol};
-    this.http.post( this.baseUrl + 'deletestock.php', inData);
+    let inData = {symbol: symbol};
+    let formData: FormData = new FormData();
+    formData.append('symbol', symbol);
+    this.http.post<any>( this.baseUrl + 'deletestock.php', formData ).subscribe( data => this.getStocks() );
+  }
+
+  editStock(symbol, shares, price){
+    let inData = {symbol: symbol, shares: shares, aveprice: price};
+    this.http.post( this.baseUrl + 'editstock.php', inData).subscribe( data => {
+      this.getStocks() 
+    });
+    console.log(shares);
+    
   }
 }

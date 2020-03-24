@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './views/home/home.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { LoginComponent } from './views/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,8 @@ import { LoginComponent } from './views/login/login.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularFontAwesomeModule
- 
+    AngularFontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

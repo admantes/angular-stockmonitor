@@ -27,7 +27,9 @@
               "src/styles.css",
               "node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": []
+            "scripts": [
+
+            ]
           },
           "configurations": {
             "production": {
@@ -37,6 +39,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "baseHref": "/admantes/stock2/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { HomeComponent } from './views/home/home.component';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,10 @@ import { HomeComponent } from './views/home/home.component';
 })
 export class AppComponent {
  
+  filterForm = new FormGroup({
+    filter: new FormControl('') 
+  });
+
   @ViewChild(HomeComponent, { static: false })
    private child: HomeComponent;
   routeChildComponent;

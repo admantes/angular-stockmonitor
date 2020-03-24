@@ -27,9 +27,9 @@
   <tr *ngFor="let stock of stocks; index as i"> 
     <th scope="row">{{ i + 1 }}</th>
     <td>{{ stock.symbol | uppercase }}</td>
-    <td>{{ stock.shares | number }}</td>   
+    <td><span  *ngIf="isEditing(i)"> <input style="width: 100%;" #shares (keyup)="updateShares(shares.value)"></span><span *ngIf="!isEditing(i)">{{ stock.shares | number  }} </span></td>   
     <td>{{ stock.price | number }}</td> 
-    <td>{{ stock.aveprice | number }}</td> 
+    <td><span  *ngIf="isEditing(i)"> <input style="width: 50px;" #editPrice (keyup)="updateAveragePrice(editPrice.value)"></span><span *ngIf="!isEditing(i)">{{ stock.aveprice | number }} </span></td> 
     <td>{{ stock.percent_change }}</td> 
     <td>{{ stock.marketvalue | number:"1.2-2"  }}</td> 
     <td>{{ stock.totalcost | number:"1.2-2"  }}</td> 
@@ -37,7 +37,17 @@
     <td>{{ stock.stoploss | number:"1.2-2"  }}</td> 
     <td>{{ stock.target | number:"1.2-2"   }}</td> 
     <td [ngClass]=" stock.action | actionColor ">{{ stock.action }}</td> 
-    <td> <fa name="pencil" tooltip="Edit" (click)="editStock(stock.symbol)"></fa> &nbsp; <fa name="trash" tooltip="Delete" (click)="deleteStock(stock.symbol)"></fa>  </td>
+    <td> 
+
+      <!-- Normal View -->
+      <span *ngIf="!isEditing(i)"> 
+         <fa name="pencil" tooltip="Edit" (click)="showEditFields(i)"></fa> &nbsp; <fa name="trash" tooltip="Delete" (click)="deleteStock(stock.symbol)"></fa> 
+      </span>
+      <!-- Editing View-->
+      <span *ngIf="isEditing(i)">
+      <fa name="close" tooltip="Edit" (click)="cancelEditing()"></fa> &nbsp; <fa name="check" tooltip="Update" (click)="updateStock(stock.symbol)"></fa> 
+    </span>
+    </td>
   </tr>
   </tbody>
 </table>
