@@ -20,12 +20,17 @@ export class HomeComponent implements OnInit {
   editingAveragePrice = 0;
   sharesPlaceholder = "0";
   pricePlaceholder = "0";
- 
+  gains = "0";
+  totalMarketValue = "0";
+  totalCost = "0";
+  currency = "Php ";
   addForm = new FormGroup({
     addSymbol: new FormControl(''), 
     addShares: new FormControl(''),
     addPrice: new FormControl(''),
   });
+
+  nfObject = new Intl.NumberFormat('en-US')
 
   constructor( private stockService:StockService ) {
      
@@ -50,6 +55,21 @@ export class HomeComponent implements OnInit {
     this.stockService.getStocks().subscribe(
       stocks => {         
         this.stocks = stocks.stock;
+      
+      
+        console.log(this.stocks);
+        console.log(this.stocks[0].price);
+
+        let gains =  this.stocks.reduce( (total, current ) => total + parseFloat(current.gainloss) ,0.0000 ).toFixed(2);
+        this.gains = this.nfObject.format( gains );
+
+        let totalCost =  this.stocks.reduce( (total, current ) => total + parseFloat(current.totalcost) ,0.0000 ).toFixed(2);
+
+        this.totalCost = this.nfObject.format( totalCost );
+
+        let totalMarketValue =  this.stocks.reduce( (total, current ) => total + parseFloat(current.marketvalue) ,0.0000 ).toFixed(2);
+        this.totalMarketValue = this.nfObject.format( totalMarketValue );
+        console.log(this.gains)
       }
     );
   }

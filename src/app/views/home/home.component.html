@@ -3,8 +3,23 @@
 
 
   <!-- Sidebar -->
-  <div class="col-lg-2 bg-secondary mt-2  text-white">  
+  <div class="col-lg-2  mt-2  text-black text-center"  style="background-color: rgb(236, 236, 236);">  
+    
+ 
+    <div class="box">
+        <h5 style="margin-top: 10px">Total Cost</h5>    
+        <div > {{currency + totalCost }}</div>
+      </div>   
 
+      <div class="box">
+        <h5 style="margin-top: 10px">Total Market Value</h5>    
+        <div> {{ currency +totalMarketValue }}</div>
+      </div>
+
+      <div class="box">
+        <h5 style="margin-top: 10px">Total Gains</h5>
+        <div  [ngClass]=" gains > 1 ? 'green': 'red' "> {{ currency +gains }}</div>
+      </div>
 
   </div>
 
@@ -20,7 +35,8 @@
       <button class="btn btn-outline-success my-2 my-sm-0" (click)="saveStock($event)">Save Stock</button>
     </form>
   </div>
-<div class="bg-secondary text-white mt-2 p-2 bg-success"> The following are real time values from the Philippine Stock Market</div> 
+<div class="bg-secondary text-white mt-2 p-2 bg-success"> 
+   The following are real time values from the Philippine Stock Market</div> 
  
 <table class="table table-striped">
   <thead>    
@@ -70,7 +86,8 @@
   </tr>
   </tbody>
 </table>
-<input #box (keyup.enter)="onEnter(box.value)">
+
+<!-- <input #box (keyup.enter)="onEnter(box.value)"> -->
 </div>
 </div>
 </div>
