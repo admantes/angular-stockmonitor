@@ -73,6 +73,10 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  convertToNumber(str){
+    return parseInt(str);
+  }
+
   deleteStock(symbol){
     
    
