@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     addShares: new FormControl(''),
     addPrice: new FormControl(''),
   });
+  fetchingData = true;
 
   nfObject = new Intl.NumberFormat('en-US')
 
@@ -52,14 +53,12 @@ export class HomeComponent implements OnInit {
 
 
   readStockData(){
+    this.fetchingData = true;
     this.stockService.getStocks().subscribe(
       stocks => {         
-        this.stocks = stocks.stock;
-      
-      
-        console.log(this.stocks);
-        console.log(this.stocks[0].price);
-
+        this.stocks = stocks.stock;      
+        
+        this.fetchingData = false;
         let gains =  this.stocks.reduce( (total, current ) => total + parseFloat(current.gainloss) ,0.0000 ).toFixed(2);
         this.gains = this.nfObject.format( gains );
 
@@ -69,7 +68,7 @@ export class HomeComponent implements OnInit {
 
         let totalMarketValue =  this.stocks.reduce( (total, current ) => total + parseFloat(current.marketvalue) ,0.0000 ).toFixed(2);
         this.totalMarketValue = this.nfObject.format( totalMarketValue );
-        console.log(this.gains)
+         
       }
     );
   }

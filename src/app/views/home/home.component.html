@@ -38,7 +38,8 @@
 <div class="bg-secondary text-white mt-2 p-2 bg-success"> 
    The following are real time values from the Philippine Stock Market</div> 
  
-<table class="table table-striped">
+<div *ngIf="fetchingData">Fetching Data...</div>
+<table class="table table-striped" *ngIf="!fetchingData">
   <thead>    
   <tr>
     <th scope="col"> # </th>
