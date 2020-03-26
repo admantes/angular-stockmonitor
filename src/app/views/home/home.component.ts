@@ -51,9 +51,13 @@ export class HomeComponent implements OnInit {
 
   }
 
+  refetchStockData(){
+    this.fetchingData = true;
+    this.readStockData();
+  }
 
   readStockData(){
-    this.fetchingData = true;
+   
     this.stockService.getStocks().subscribe(
       stocks => {         
         this.stocks = stocks.stock;      

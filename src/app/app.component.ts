@@ -19,7 +19,7 @@ export class AppComponent {
 
   Refresh(){
     //console.log(this.routeChildComponent);
-    this.routeChildComponent.readStockData();
+    this.routeChildComponent.refetchStockData();
   }
 
   //Called when router activates a component and passes the component reference 
