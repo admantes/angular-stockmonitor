@@ -24,18 +24,22 @@
   </div>
 
 
-<div class="col-lg-9">
+<div class="col-lg-10">
 
   <!-- Add Stock -->
-  <div *ngIf="showAddScreen" style="margin-top: 10px;">
-    <form [formGroup]="addForm" (submit)="saveStock($event)">  
+  
+  <form [formGroup]="addForm" (submit)="saveStock($event)"> 
+    <div *ngIf="showAddScreen" style="margin-top: 10px;"  class="add-stock">
+     
       <input type="text" style="margin-right: 10px;" placeholder="Symbol (JFC)" formControlName="addSymbol">
       <input type="text" style="margin-right: 10px;" placeholder="Shares (200)"  formControlName="addShares">
       <input type="text" style="margin-right: 10px;"  placeholder="Average Price (123.0000)"  formControlName="addPrice">
       <button class="btn btn-outline-success my-2 my-sm-0" (click)="saveStock($event)">Save Stock</button>
+    </div>
     </form>
-  </div>
-<div class="bg-secondary text-white mt-2 p-2 bg-success"> 
+  
+
+<div class="bg-secondary text-white mt-2 p-2 bg-success" style="width: 100%;"> 
    The following are real time values from the Philippine Stock Market</div> 
  
 <div *ngIf="fetchingData">Fetching Data...</div>
