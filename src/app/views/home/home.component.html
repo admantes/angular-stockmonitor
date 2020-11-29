@@ -42,36 +42,36 @@
 <table class="table table-striped" *ngIf="!fetchingData">
   <thead>    
   <tr>
-    <th scope="col"> # </th>
+    <th scope="col" class="large-only"> # </th>
     <th scope="col"> Symbol </th>
     <th scope="col">Shares</th>
     <th scope="col"> Current Price </th>
     <th scope="col"> Ave. Price</th>
-    <th scope="col"> % Change</th>
-    <th scope="col"> Market Value </th>
-    <th scope="col"> Total Cost </th>
+    <th scope="col" class="large-only" > % Change</th>
+    <th scope="col" class="large-only"> Market Value </th>
+    <th scope="col" class="large-only"> Total Cost </th>
     <th scope="col"> Gain/Loss </th>
-    <th scope="col"> Stop Loss</th> 
-    <th scope="col"> Target</th>
-    <th scope="col"> Advice </th>
+    <th scope="col" class="large-only"> Stop Loss</th> 
+    <th scope="col" class="large-only"> Target</th>
+    <th scope="col" class="large-only"> Advice </th>
     <th scope="col"> Actions</th>
   </tr> 
   </thead>
   <tbody>
  
   <tr *ngFor="let stock of stocks; index as i"> 
-    <th scope="row">{{ i + 1 }}</th>
+    <th scope="row"  class="large-only">{{ i + 1 }}</th>
     <td>{{ stock.symbol | uppercase }}</td>
     <td><span  *ngIf="isEditing(i)"> <input style="width: 100%;background-color: #abf3e3;" #shares (keyup)="updateShares(shares.value)" value="{{sharesPlaceholder}}"></span><span *ngIf="!isEditing(i)">{{ stock.shares | number  }} </span></td>   
     <td>{{ stock.price | number }}</td> 
-    <td><span  *ngIf="isEditing(i)"> <input style="width: 100%; background-color: #abf3e3;" #editPrice (keyup)="updateAveragePrice(editPrice.value)"  value="{{pricePlaceholder}}"></span><span *ngIf="!isEditing(i)">{{ stock.aveprice | number }} </span></td> 
-    <td>{{ stock.percent_change }}</td> 
-    <td>{{ stock.marketvalue | number:"1.2-2"  }}</td> 
-    <td>{{ stock.totalcost | number:"1.2-2"  }}</td> 
+    <td ><span  *ngIf="isEditing(i)"> <input style="width: 100%; background-color: #abf3e3;" #editPrice (keyup)="updateAveragePrice(editPrice.value)"  value="{{pricePlaceholder}}"></span><span *ngIf="!isEditing(i)">{{ stock.aveprice | number }} </span></td> 
+    <td class="large-only" >{{ stock.percent_change }}</td> 
+    <td class="large-only">{{ stock.marketvalue | number:"1.2-2"  }}</td> 
+    <td class="large-only">{{ stock.totalcost | number:"1.2-2"  }}</td> 
     <td [ngClass]="stock.fcolor">{{ stock.gainloss | number:"1.2-2" }}</td> 
-    <td>{{ stock.stoploss | number:"1.2-2"  }}</td> 
-    <td>{{ stock.target | number:"1.2-2"   }}</td> 
-    <td [ngClass]=" stock.action | actionColor ">{{ stock.action }}</td> 
+    <td class="large-only" class="large-only">{{ stock.stoploss | number:"1.2-2"  }}</td> 
+    <td class="large-only">{{ stock.target | number:"1.2-2"   }}</td> 
+    <td class="large-only" [ngClass]=" stock.action | actionColor ">{{ stock.action }}</td> 
     <td> 
 
       <!-- Normal View -->

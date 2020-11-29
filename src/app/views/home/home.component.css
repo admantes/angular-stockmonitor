@@ -1,9 +1,9 @@
 .green{
-    color: green;
+    color: rgb(51, 139, 51);
 }
 
 .red{
-    color: red;
+    color: rgb(187, 59, 59);
 }
 
 .box{
@@ -11,4 +11,11 @@ width: 100%;
 background: #fff;
 padding: 8px;
 margin-top: 10px;
+}
+
+@media only screen and (max-width:500px){
+    .large-only{
+        display:none;
+    }
+ 
 }
